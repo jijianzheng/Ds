@@ -56,6 +56,15 @@ private:
 
 	void rangeCheck(int index)
 	{
+		if (index >= m_size || index < 0)
+		{
+			std::cout << "index error" << std::endl;
+			return;
+		}
+	}
+
+	void rangeCheckForAdd(int index)
+	{
 		if (index > m_size || index < 0)
 		{
 			std::cout << "index error" << std::endl;
@@ -87,6 +96,8 @@ public:
 
 	void add(int index, T element)
 	{
+		rangeCheckForAdd(index);
+
 		if (first == nullptr)
 			first = new Node(element, nullptr);
 		else
@@ -153,8 +164,8 @@ public:
 
 	void clear()
 	{
-		m_size = 0;
 		freeMem();
+		m_size = 0;
 		first = nullptr;
 	}
 
@@ -170,7 +181,6 @@ public:
 
 	~LinkedList()
 	{
-		while (first != nullptr)
-			freeMem();
+		freeMem();
 	}
 };
